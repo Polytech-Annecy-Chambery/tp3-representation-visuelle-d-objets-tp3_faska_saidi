@@ -42,7 +42,9 @@ class Wall:
                                       'height': self.parameters['height'], \
                                       'thickness': self.parameters['thickness'], \
                                       'color': self.parameters['color'],
-                                      'position': self.parameters['position']})
+                                      'position': self.parameters['position'],
+                                      'edges': self.parameters['edges'],
+                                      'orientation': self.parameters['orientation']})
         self.objects.append(self.parentSection) 
         
     # Getter
@@ -68,6 +70,9 @@ class Wall:
                     
     # Draws the faces
     def draw(self):
-        # A compléter en remplaçant pass par votre code
-        pass
-  
+        gl.glPushMatrix()
+        gl.glRotate(self.parameters['orientation'],0,0,1)
+        gl.glTranslate(self.parameters['position'][0],self.parameters['position'][1],self.parameters['position'][2])
+        for x in self.objects:
+            x.draw()
+        gl.glPopMatrix()
